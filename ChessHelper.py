@@ -2,7 +2,7 @@
 # Bradley Thompson
 
 import numpy as np
-from chess import WHITE, BLACK
+from chess import WHITE
 
 
 class ChessHelper:
