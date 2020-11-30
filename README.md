@@ -1,6 +1,14 @@
 # SimpleMindChessEngine
 A machine learning powered chess engine with the goal of staying as simple as possible.
 
+###### Note:
+For simplicities sake, I'm not going to start this as a full chess-playing engine. It's going 
+to simply be a multi-layered neural network implementation that evaluates how strong a board 
+position is.
+
+Later on, this can be expanded to then evaluate which possible move should be chosen, and then
+it can be transformed into a full-blown chess engine.
+
 #### Dev Info
 > Developed by Bradley Thompson  
 > Final project for CS 545 - Intro to Machine Learning (Fall 2020)  
