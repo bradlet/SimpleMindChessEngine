@@ -31,3 +31,16 @@ Currently using label of winning state ('1'), and losing state ('0') to keep it 
 I didn't come up with the bitmap representation concept, pulled from this article on evaluating 
 chess board state strength with machine learning:
 https://www.ai.rug.nl/~mwiering/GROUP/ARTICLES/ICPRAM_CHESS_DNN_2018.pdf
+
+## python-chess
+I'm using python-chess so that I don't have to worry about the logic behind a lot of
+Chess rules. The library is great, [check it out!](https://python-chess.readthedocs.io/en/latest/)
+
+    # Example of three ways to make moves
+    move = chess.Move(from_square=chess.E2, to_square=chess.E4)
+    board.push(move)
+    move2 = chess.Move.from_uci("e7e5")
+    board.push(move2)
+    # The board will accept non-legal moves. Have to be careful about that.
+    # Board also has no concept of which turn it is as far as push_san() is concerned.
+    board.push_san("exf4") 
