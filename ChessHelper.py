@@ -24,13 +24,17 @@ class ChessHelper:
         "K": 11
     }
 
-    # Returns a numpy array of shape [64, 12] (squares on chess board, number of possible pieces including both sides).
+    # Convert a board into a vector of len 768, 64 x 12
+    # | 12 features for each piece (6 per color)
+    # | So, for each of the 64 squares, there are 12 features.
+    # -> Return: A numpy array of shape [64, 12]
     # One row from this array will be all zeroes if a square is empty, or it will have 1 or -1 in the index
     # corresponding to whatever piece is in that square.
-    # | I did not come up with this idea for data representation, idea from:
-    # | https://www.ai.rug.nl/~mwiering/GROUP/ARTICLES/ICPRAM_CHESS_DNN_2018.pdf
     @staticmethod
     def bitmap_representation(board):
+        # I did not come up with this idea for data representation, idea from:
+        # https://www.ai.rug.nl/~mwiering/GROUP/ARTICLES/ICPRAM_CHESS_DNN_2018.pdf
+
         # representation is dependent on which side's turn it is.
         player, opponent = (1, -1) if board.turn is WHITE else (-1, 1)
         array = np.zeros((64, 12), dtype=type(int))
