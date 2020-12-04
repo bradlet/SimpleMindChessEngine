@@ -37,9 +37,6 @@ def load_data(name):
 
 
 if __name__ == '__main__':
-    board = chess.Board()
-    # print(board.legal_moves)
-
     dataset = load_data(DATASET_FILE_PATH)
     learner = BSL(dataset)
 
@@ -47,7 +44,3 @@ if __name__ == '__main__':
 
     plot_accuracy(training_history)
     plot_loss(training_history)
-
-    # prediction = learner.eval()
-    #
-    # print(prediction)
