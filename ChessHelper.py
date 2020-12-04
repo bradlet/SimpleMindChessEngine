@@ -34,9 +34,6 @@ class ChessHelper:
     def bitmap_representation(board):
         # I did not come up with this idea for data representation, idea from:
         # https://www.ai.rug.nl/~mwiering/GROUP/ARTICLES/ICPRAM_CHESS_DNN_2018.pdf
-
-        # representation is dependent on which side's turn it is.
-        player, opponent = (1, -1) if board.turn is WHITE else (-1, 1)
         array = np.zeros((64, 12), dtype=type(int))
         array_ctr = 0
 
@@ -47,7 +44,8 @@ class ChessHelper:
                 if not char.isalpha():
                     array_ctr += int(char)
                 else:
-                    array[array_ctr][ChessHelper.__pieceMap[char]] = player if char.islower() else opponent
+                    # -1 DENOTES BLACK, 1 DENOTES WHITE
+                    array[array_ctr][ChessHelper.__pieceMap[char]] = -1 if char.isupper() else 1
                     array_ctr += 1
 
         return array
