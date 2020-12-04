@@ -21,12 +21,18 @@ class BoardStateLearner:
         self.data = np.transpose(np.transpose(dataset)[:-1])
         self.data_labels = ch.label_one_hot_encode(np.transpose(np.transpose(dataset)[-1]))
 
+        # Delineate into training and test, then use validation_data=(testdata, testdatalabels) in model.fit
+
         self._model = Sequential()
         self._model.add(Dense(HIDDEN_LAYER_UNITS, input_dim=INPUT_UNITS, activation='relu'))
         self._model.add(Dense(HIDDEN_LAYER_UNITS, activation='relu'))
         self._model.add(Dense(OUTPUT_UNITS, activation='softmax'))
 
-        self._model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['binary_accuracy'])
+        self._model.compile(loss='binary_crossentropy', optimizer='SGD', metrics=['binary_accuracy'])
 
-    def train(self):
-        return self._model.fit(self.data, self.data_labels, epochs=10)
+    def train(self, epochs):
+        return self._model.fit(self.data, self.data_labels, epochs=epochs)
+
+    def eval(self):
+        test = self.data[8:10]
+        return self._model.predict(test)

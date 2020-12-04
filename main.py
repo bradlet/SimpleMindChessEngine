@@ -19,5 +19,7 @@ if __name__ == '__main__':
     dataset = load_data(DATASET_FILE_PATH)
     learner = BSL(dataset)
 
-    history = learner.train()
-    print(history)
+    history = learner.train(10)
+    prediction = learner.eval()
+
+    print(prediction)
