@@ -1,11 +1,35 @@
 # Simple Mind Chess Engine
 # Bradley Thompson
 
-import numpy as np
 import chess.svg
+import numpy as np
+import matplotlib.pyplot as plt
 from BoardStateLearner import BoardStateLearner as BSL
 
 from DatasetBuilder import DATASET_FILE_PATH
+
+
+# Pyplot layout taken from https://towardsdatascience.com/building-our-first-neural-network-in-keras-bdc8abbc17f5
+# I could have changed it arbitrarily but I liked the way the one in this tutorial looked, and this isn't really
+# directly relevant to the machine learning part of the project. So I figured it was fine to copy!
+def plot_accuracy(history):
+    plt.plot(history.history['binary_accuracy'])
+    plt.plot(history.history['val_binary_accuracy'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+
+
+def plot_loss(history):
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
 
 
 def load_data(name):
@@ -19,7 +43,11 @@ if __name__ == '__main__':
     dataset = load_data(DATASET_FILE_PATH)
     learner = BSL(dataset)
 
-    history = learner.train(10)
+    training_history = learner.train(60)
+
+    plot_accuracy(training_history)
+    plot_loss(training_history)
+
     # prediction = learner.eval()
     #
     # print(prediction)
