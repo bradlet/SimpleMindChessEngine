@@ -9,7 +9,7 @@ from DatasetBuilder import DATASET_FILE_PATH
 
 
 def load_data(name):
-    return np.loadtxt(fname=name, delimiter=" ", dtype=np.dtype(type(int)))
+    return np.loadtxt(fname=name, delimiter=" ", dtype=np.dtype(np.dtype("float32")))
 
 
 if __name__ == '__main__':
@@ -18,3 +18,6 @@ if __name__ == '__main__':
 
     dataset = load_data(DATASET_FILE_PATH)
     learner = BSL(dataset)
+
+    history = learner.train()
+    print(history)
