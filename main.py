@@ -20,6 +20,6 @@ if __name__ == '__main__':
     learner = BSL(dataset)
 
     history = learner.train(10)
-    prediction = learner.eval()
-
-    print(prediction)
+    # prediction = learner.eval()
+    #
+    # print(prediction)

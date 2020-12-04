@@ -18,21 +18,29 @@ OUTPUT_UNITS = 2
 class BoardStateLearner:
 
     def __init__(self, dataset):
-        self.data = np.transpose(np.transpose(dataset)[:-1])
-        self.data_labels = ch.label_one_hot_encode(np.transpose(np.transpose(dataset)[-1]))
+        # Transpose transpose to select by column. Could probably do this in more cleanly, but numpy hsplit() makes
+        # an array of arrays, and I figured any cleaning that up would be just as messy.
+        data = np.transpose(np.transpose(dataset)[:-1])
+        data_labels = ch.label_one_hot_encode(np.transpose(np.transpose(dataset)[-1]))
 
-        # Delineate into training and test, then use validation_data=(testdata, testdatalabels) in model.fit
+        # Delineate training and test data
+        partition_index = int(len(data) * .8)
+        self.training_data = data[:partition_index]
+        self.test_data = data[partition_index:]
+        self.training_labels = data_labels[:partition_index]
+        self.test_labels = data_labels[partition_index:]
 
+        # Setup model w/ Keras
         self._model = Sequential()
         self._model.add(Dense(HIDDEN_LAYER_UNITS, input_dim=INPUT_UNITS, activation='relu'))
         self._model.add(Dense(HIDDEN_LAYER_UNITS, activation='relu'))
         self._model.add(Dense(OUTPUT_UNITS, activation='softmax'))
-
         self._model.compile(loss='binary_crossentropy', optimizer='SGD', metrics=['binary_accuracy'])
 
     def train(self, epochs):
-        return self._model.fit(self.data, self.data_labels, epochs=epochs)
+        return self._model.fit(self.training_data, self.training_labels,
+                               validation_data=(self.test_data, self.test_labels), epochs=epochs)
 
     def eval(self):
-        test = self.data[8:10]
+        test = self.test_data[8:10]
         return self._model.predict(test)
