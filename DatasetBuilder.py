@@ -43,4 +43,5 @@ if __name__ == "__main__":
 
     dataset_file = open(DATASET_FILE_PATH, 'a')
     dataset_file.writelines(data)
+    dataset_file.write('\n')  # Needed to make sure the script writes on a separate line on next run.
     dataset_file.close()
