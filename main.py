@@ -40,7 +40,8 @@ if __name__ == '__main__':
     dataset = load_data(DATASET_FILE_PATH)
     learner = BSL(dataset)
 
-    training_history = learner.train(60)
+    # training_history = learner.train(60)
+    print(learner.best_next_move(chess.Board().board_fen(), chess.WHITE))
 
-    plot_accuracy(training_history)
-    plot_loss(training_history)
+    # plot_accuracy(training_history)
+    # plot_loss(training_history)

@@ -41,6 +41,8 @@ class BoardStateLearner:
         return self._model.fit(self.training_data, self.training_labels,
                                validation_data=(self.test_data, self.test_labels), epochs=epochs)
 
-    def eval(self):
-        test = self.test_data[8:10]
+    def best_next_move(self, current_board_fen, current_turn):
+        ch.legal_moves_bitmap(current_board_fen, current_turn)
+        test = np.expand_dims(self.test_data[8], axis=0)  # Need to make instance type 2d array for keras model.predict
+
         return self._model.predict(test)

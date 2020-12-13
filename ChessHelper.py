@@ -2,7 +2,7 @@
 # Bradley Thompson
 
 import numpy as np
-from chess import WHITE
+import chess
 
 
 class ChessHelper:
@@ -50,11 +50,16 @@ class ChessHelper:
 
         return array
 
+    # Input: Board state in fen notation; Output: 2d array of the bitmap representation for all possible next moves
+    @staticmethod
+    def legal_moves_bitmap(board_fen, turn):
+        board = chess.Board(board_fen)
+        board.turn = turn
+        print(board.legal_moves)
+
     # Converts class data labels into a binary one hot encoding representation
     @staticmethod
     def label_one_hot_encode(data_labels):
         # np.array doesn't know how to handle maps apparently, so need the list conversion as an intermediary step.
         return np.array(list(map(lambda x: [1, 0] if x == -1 else [0, 1], data_labels)))
-
-
 
