@@ -1,6 +1,8 @@
 # SimpleMindChessEngine
 A machine learning powered chess engine with the goal of staying as simple as possible.
 
+## Powered by [Tensorflow Keras](https://keras.io/)
+
 ###### Note:
 For simplicities sake, I'm not going to start this as a full chess-playing engine. It's going 
 to simply be a multi-layered neural network implementation that evaluates how strong a board 
