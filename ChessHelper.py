@@ -68,7 +68,8 @@ class ChessHelper:
             next_board.push(move)
             next_move_board_states.append(next_board)
 
-        return list(map(ChessHelper.flattened_bitmap, next_move_board_states))
+        # Many consumers will expect this to contain floats, and others shouldn't complain about it.
+        return np.array(list(map(ChessHelper.flattened_bitmap, next_move_board_states))).astype(float)
 
     # Converts class data labels into a binary one hot encoding representation
     @staticmethod

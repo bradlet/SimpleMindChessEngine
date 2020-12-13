@@ -42,7 +42,10 @@ class BoardStateLearner:
                                validation_data=(self.test_data, self.test_labels), epochs=epochs)
 
     def best_next_move(self, current_board_fen, current_turn):
-        ch.legal_moves_bitmap(current_board_fen, current_turn)
-        test = np.expand_dims(self.test_data[8], axis=0)  # Need to make instance type 2d array for keras model.predict
+        next_move_board_bitmaps = ch.legal_moves_bitmaps(current_board_fen, current_turn)
 
-        return self._model.predict(test)
+        if len(next_move_board_bitmaps) <= 1:
+            # Need to make instance type 2d array for keras model.predict
+            next_move_board_bitmaps = np.expand_dims(current_board_fen, axis=0)
+
+        return self._model.predict(next_move_board_bitmaps)
