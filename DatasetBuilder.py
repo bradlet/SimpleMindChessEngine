@@ -29,7 +29,7 @@ if __name__ == "__main__":
     board = chess.Board()
     for move in chess_game.mainline_moves():
         board.push(move)
-        data_vector = np.reshape(ch.bitmap_representation(board), (768,))
+        data_vector = ch.flattened_bitmap(board)
         data_label = 1 if winner is chess.WHITE else -1
         data_line = np.append(data_vector, data_label)
         board_state_history = np.vstack((board_state_history, data_line))
