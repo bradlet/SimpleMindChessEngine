@@ -2,6 +2,7 @@
 # Bradley Thompson
 
 import numpy as np
+import chess
 from ChessHelper import ChessHelper as ch
 
 from keras.models import Sequential
@@ -42,10 +43,17 @@ class BoardStateLearner:
                                validation_data=(self.test_data, self.test_labels), epochs=epochs)
 
     def best_next_move(self, current_board_fen, current_turn):
-        next_move_board_bitmaps = ch.legal_moves_bitmaps(current_board_fen, current_turn)
+        board = chess.Board()
+        board.set_fen(current_board_fen)  # Sets board to given state represented by the fen notation input
+        board.turn = current_turn
+        next_move_board_bitmaps = ch.legal_moves_bitmaps(board)
 
         if len(next_move_board_bitmaps) <= 1:
             # Need to make instance type 2d array for keras model.predict
             next_move_board_bitmaps = np.expand_dims(current_board_fen, axis=0)
 
-        return self._model.predict(next_move_board_bitmaps)
+        predictions = np.transpose(self._model.predict(next_move_board_bitmaps))
+        # We are going to maximise on win probability for who's turn it is.
+        predictions = predictions[1] if current_turn == chess.WHITE else predictions[0]
+
+        return list(board.legal_moves)[int(np.argmax(predictions))]

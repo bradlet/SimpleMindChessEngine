@@ -55,20 +55,18 @@ class ChessHelper:
     def flattened_bitmap(board):
         return np.reshape(ChessHelper.bitmap_representation(board), (768,))
 
-    # Input: Board state in fen notation; Output: 2d array of the bitmap representation for all possible next moves
+    # Input: Board state in fen notation;
+    # Output: 2d array of bitmaps for legal next moves
     @staticmethod
-    def legal_moves_bitmaps(board_fen, turn):
-        board = chess.Board()
-        board.set_fen(board_fen)
-        board.turn = turn
-
+    def legal_moves_bitmaps(board):
         next_move_board_states = list()
+
         for move in board.legal_moves:
             next_board = board.copy()
             next_board.push(move)
             next_move_board_states.append(next_board)
 
-        # Many consumers will expect this to contain floats, and others shouldn't complain about it.
+        # Many consumers will expect bitmap to contain floats, and others shouldn't complain about it.
         return np.array(list(map(ChessHelper.flattened_bitmap, next_move_board_states))).astype(float)
 
     # Converts class data labels into a binary one hot encoding representation
