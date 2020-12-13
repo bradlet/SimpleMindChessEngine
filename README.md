@@ -26,7 +26,7 @@ accordingly.
 ## Data Representation
 Dataset constructed from chess.com data using DatasetBuilder.py. The data is a flattened bitmap
 representation of a chessboard: 1 board state per row, with the final column holding the label.
-Currently using label of winning state ('1'), and losing state ('-1') to keep it simple.
+Currently using labels for a white-side win ('1'), and a black-side win ('-1') to keep it simple.
 
 I didn't come up with the bitmap representation concept, pulled from this article on evaluating 
 chess board state strength with machine learning:
