@@ -36,10 +36,10 @@ def plot_loss(history):
 # This is the entry point for the REST service that uses this app.
 def best_move_call(side, fen):
     current_dataset = load_data(DATASET_FILE_PATH)
-    neural_net = BSL(dataset)
+    neural_net = BSL(current_dataset)
     neural_net.train(epochs=25)
 
-    return neural_net.best_next_move(fen, side)
+    return str(neural_net.best_next_move(fen, side))
 
 
 def load_data(name):
