@@ -1,3 +1,7 @@
+# Stuff I used for RESTful web service
+data/model*
+server.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -64,7 +68,6 @@ db.sqlite3-journal
 # Flask stuff:
 instance/
 .webassets-cache
-server.py
 
 # Scrapy stuff:
 .scrapy

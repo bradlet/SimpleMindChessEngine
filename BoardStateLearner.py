@@ -42,6 +42,14 @@ class BoardStateLearner:
         return self._model.fit(self.training_data, self.training_labels,
                                validation_data=(self.test_data, self.test_labels), epochs=epochs)
 
+    def save_model(self, file_name_without_type):
+        model_json = self._model.to_json()
+        # Save model info to json file
+        with open("data/" + file_name_without_type + ".json", "w") as json_file:
+            json_file.write(model_json)
+        # Save model weights in separate data file
+        self._model.save_weights("data/" + file_name_without_type + ".h5")
+
     def best_next_move(self, current_board_fen, current_turn):
         board = chess.Board()
         board.set_fen(current_board_fen)  # Sets board to given state represented by the fen notation input

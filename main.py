@@ -51,9 +51,9 @@ if __name__ == '__main__':
     learner = BSL(dataset)
 
     board = chess.Board()
-    training_history = learner.train(60)
+    training_history = learner.train(epochs=25)
 
-    print(learner.best_next_move(board.board_fen(), chess.WHITE))
+    learner.save_model("model")
 
     plot_accuracy(training_history)
     plot_loss(training_history)
