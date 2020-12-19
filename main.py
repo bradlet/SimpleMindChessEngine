@@ -32,6 +32,16 @@ def plot_loss(history):
     plt.show()
 
 
+# Not trying to really follow a scalable pattern, just doing easy stuff to make this play project work.
+# This is the entry point for the REST service that uses this app.
+def best_move_call(side, fen):
+    current_dataset = load_data(DATASET_FILE_PATH)
+    neural_net = BSL(dataset)
+    neural_net.train(epochs=25)
+
+    return neural_net.best_next_move(fen, side)
+
+
 def load_data(name):
     return np.loadtxt(fname=name, delimiter=" ", dtype=np.dtype(np.dtype("float32")))
 
