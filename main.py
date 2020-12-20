@@ -4,9 +4,7 @@
 import chess.svg
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.models import model_from_json
 from BoardStateLearner import BoardStateLearner as BSL
-from BoardStateLearner import MODEL_SAVE_FILE_WITHOUT_TYPE
 from DatasetBuilder import DATASET_FILE_PATH
 
 
@@ -31,21 +29,6 @@ def plot_loss(history):
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Test'], loc='upper left')
     plt.show()
-
-
-# Not trying to really follow a scalable pattern, just doing easy stuff to make this play project work.
-# This is the entry point for the REST service that uses this app.
-def best_move_call(side, fen):
-    json_file = open(MODEL_SAVE_FILE_WITHOUT_TYPE+".json", "r")
-    model_json = json_file.read()
-    json_file.close()
-
-    trained_model = model_from_json(model_json)
-    trained_model.load_weights(MODEL_SAVE_FILE_WITHOUT_TYPE+".h5")
-
-    neural_net = BSL("EMPTY")
-    neural_net.overwrite_model(trained_model)
-    return str(neural_net.best_next_move(fen, side))
 
 
 def load_data(name):
