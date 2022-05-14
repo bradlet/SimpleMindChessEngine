@@ -16,6 +16,10 @@ it can be transformed into a full-blown chess engine.
 > Final project for CS 545 - Intro to Machine Learning (Fall 2020)  
 > Prof: Anthony Rhodes
 
+**Environment Setup**
+To install all dependencies, run:
+> pip3 install -r requirements.txt
+
 ### Machine learning in chess engines
 A great lecture to watch:
 https://www.youtube.com/watch?v=P0jd8AHwjXw&ab_channel=MachineLearningConference
