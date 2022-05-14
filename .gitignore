@@ -1,6 +1,5 @@
-# Stuff I used for RESTful web service
+# Custom ignores
 data/model*
-server.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

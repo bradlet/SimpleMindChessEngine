@@ -2,7 +2,6 @@
 # Bradley Thompson
 
 import numpy as np
-import chess
 
 
 class ChessHelper:
